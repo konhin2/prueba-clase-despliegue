@@ -3,9 +3,15 @@ const express = require('express')
 const app = express()
 
 const connectDB = require("./config/db")
+const hbs = require("hbs")
+
+const bodyParser = require("body-parser")
 
 // Para poder usar variables de entorno
 require('dotenv').config()
+
+// Importar Modelo
+const Book = require('./models/Book')
 
 // 2.- Middlewares
 // Un middleware es una funcion que se ejecuta despues de que el servidor recive una peticion peticion y antes de dar una respuesta.
@@ -18,9 +24,37 @@ app.set("view engine", "hbs")
 
 hbs.registerPartials(__dirname + "/views/partials")
 
+// Usar libreria de body parser que es un middleware
+app.use(bodyParser.urlencoded({ extended: true }))
+
 connectDB()
 
 // 3.- Rutas
+
+// Home
+app.get('/', (req, res) => {
+    res.render('index')
+})
+
+// Obtener los libros GET
+app.get("/books", async (req, res) => {
+    try {
+        const librosEncontrados = await Book.find({})
+        console.log(librosEncontrados)
+        res.render('books', {
+            books: librosEncontrados
+        })
+    }
+    catch (err) {
+        console.log(err)
+    }
+})
+
+// Ver detalles de cada libro 
+
+// Editar un libro
+
+// Borrar un libro
 
 // 4.- Servidor
 app.listen(process.env.PORT, () => {
