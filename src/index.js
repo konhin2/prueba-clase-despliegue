@@ -17,18 +17,23 @@ const Book = require('./models/Book')
 // Un middleware es una funcion que se ejecuta despues de que el servidor recive una peticion peticion y antes de dar una respuesta.
 
 // Trabajar con archivos estaticos que puedan ser visualizados por el cliente
-app.use(express.static(__dirname + './public'))
+app.use(express.static(__dirname + '/public'))
 
 app.set("views", __dirname + "/views")
 app.set("view engine", 'hbs')
 
-
+connectDB()
 // Usar libreria de body parser que es un middleware
 app.use(bodyParser.urlencoded({ extended: true }))
 
-connectDB()
+
 
 // 3.- Rutas
+
+// Home
+app.get('/', (req, res) => {
+    res.render('index')
+})
 
 // Obtener los libros GET
 app.get("/books", async (req, res) => {
@@ -48,11 +53,6 @@ app.get("/books", async (req, res) => {
 // Editar un libro
 
 // Borrar un libro
-
-// Home
-app.get('/', (req, res) => {
-    res.render('index')
-})
 
 // 4.- Servidor
 app.listen(process.env.PORT, () => {
