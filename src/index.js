@@ -3,7 +3,7 @@ const express = require('express')
 const app = express()
 
 const connectDB = require("./config/db")
-const hbs = require("hbs")
+require("hbs")
 
 const bodyParser = require("body-parser")
 
@@ -20,7 +20,7 @@ const Book = require('./models/Book')
 app.use(express.static(__dirname + './public'))
 
 app.set("views", __dirname + "/views")
-app.set("view engine", hbs)
+app.set("view engine", 'hbs')
 
 
 // Usar libreria de body parser que es un middleware
@@ -39,7 +39,6 @@ app.get('/', (req, res) => {
 app.get("/books", async (req, res) => {
     try {
         const librosEncontrados = await Book.find({})
-        console.log(librosEncontrados)
         res.render('books', {
             books: librosEncontrados
         })
