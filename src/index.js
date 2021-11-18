@@ -20,9 +20,8 @@ const Book = require('./models/Book')
 app.use(express.static(__dirname + './public'))
 
 app.set("views", __dirname + "/views")
-app.set("view engine", "hbs")
+app.set("view engine", hbs)
 
-hbs.registerPartials(__dirname + "/views/partials")
 
 // Usar libreria de body parser que es un middleware
 app.use(bodyParser.urlencoded({ extended: true }))
