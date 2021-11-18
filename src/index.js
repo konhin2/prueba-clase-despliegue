@@ -30,11 +30,6 @@ connectDB()
 
 // 3.- Rutas
 
-// Home
-app.get('/', (req, res) => {
-    res.render('index')
-})
-
 // Obtener los libros GET
 app.get("/books", async (req, res) => {
     try {
@@ -53,6 +48,11 @@ app.get("/books", async (req, res) => {
 // Editar un libro
 
 // Borrar un libro
+
+// Home
+app.get('/', (req, res) => {
+    res.render('index')
+})
 
 // 4.- Servidor
 app.listen(process.env.PORT, () => {
