@@ -37,15 +37,10 @@ app.get('/', (req, res) => {
 
 // Obtener los libros GET
 app.get("/books", async (req, res) => {
-    try {
-        const librosEncontrados = await Book.find({})
-        res.render('books', {
-            books: librosEncontrados
-        })
-    }
-    catch (err) {
-        console.log(err)
-    }
+    const librosEncontrados = await Book.find({})
+    res.render('books', {
+        books: librosEncontrados
+    })
 })
 
 // Ver detalles de cada libro 
